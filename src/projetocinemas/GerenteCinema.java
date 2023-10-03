@@ -164,7 +164,7 @@ public class GerenteCinema {
         System.out.println("3 - idade");
         System.out.println("4 - email ");
         System.out.println("5 - telfone");
-        System.out.println("6 - endereço");
+     
         System.out.println("7 sair");
     }
  
@@ -205,12 +205,7 @@ public class GerenteCinema {
                           
                           break;
                           
-                      case 6:
-                            System.out.println(" Digite o novo nome que voce deseja editar"); 
-                          String endereco = ler.next();
-                          c.setEnderco(endereco);
-                          
-                          break;
+                      
                           
                       case 7:
                           System.out.println("saindo.....");
@@ -266,6 +261,7 @@ public class GerenteCinema {
         System.out.println("9 - reserva sala");
         System.out.println("10 -cancelar reserva da sala");
         System.out.println("11 - verificar sala disponivel");
+        System.out.println("12 - comprar ingresso");
         System.out.println("0 - sair do menu");
     }
     public  void menuClienteCadastro(){

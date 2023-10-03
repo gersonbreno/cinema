@@ -8,8 +8,15 @@ package projetocinemas;
  *
  * @author gerso
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class ProjetoCinemas {
 
@@ -19,9 +26,8 @@ public class ProjetoCinemas {
     public static void main(String[] args) {
      
        
-              
+      
 
-        
         
                 
         int numeroAssento = 0;
@@ -36,12 +42,12 @@ public class ProjetoCinemas {
        Filmes f = new Filmes("black clove", "açao", "2", 01);
         Sala s = new Sala(10, 5);
         Sessao se = new Sessao(f, s, "2");
-        Igresso i = new Igresso(se, 10);
+   //     Igresso i = new Igresso(se, 10);
         
        // s.reservarAssento(11);
-     s.reservarAssento(4);
-        s.temAssentosDisponiveis();
-        s.cancelarReservaAssento(6);
+       s.reservarAssento(4);
+         s.temAssentosDisponiveis();
+          s.cancelarReservaAssento(6);
    
        
 Filmes filme = null;
@@ -101,7 +107,7 @@ Assento assento = null;
                                 System.out.println("digite o preço do Ingresso: ");
                                 float precoinresso = ler.nextFloat();
 
-                               ingresso = new Igresso(sessao, precoinresso);
+                               ingresso = new Igresso(sessao, filme, precoinresso);
 
                                 break;
 
@@ -167,13 +173,11 @@ Assento assento = null;
                             int idade = ler.nextInt();
                             System.out.println("Informe seu enderco de email: ");
                             String email = ler.next();
-                            System.out.println("Informe seu endereço: ");
-                            String enereco = ler.next();
                             System.out.println("Informe seu telefone: ");
                             int telefone = ler.nextInt();
                             System.out.println("Informe seu CPF: ");
                             int cpf = ler.nextInt();
-                            Cliente cliente = new Cliente(nomeCL, idade, email, enereco, telefone, cpf);
+                            Cliente cliente = new Cliente(nomeCL, idade, email, telefone, cpf);
                             gc.CadastrarCliente(cliente);
 
                             break;
@@ -193,7 +197,9 @@ Assento assento = null;
 
                         case 4:
                            if (ingresso != null) {
-                              ingresso.reservar();
+                               System.out.println("digite o codico do filme");
+                               int codfilme = ler.nextInt();
+                              ingresso.reservarIngressoPorCodigo(codfilme);
             } else {
                 System.out.println("o admnistrado nao cadostrou nenhum ingresso ainda ");
             }
@@ -214,9 +220,13 @@ Assento assento = null;
 
                         case 6:
                               if (ingresso != null) {
-                            ingresso.gerarComprovante();
+                                    System.out.println("digite o codico do filme");
+                               int codfi = ler.nextInt();
+                            ingresso.gerarComprovante(codfi);
+                            
+                            
             } else {
-                System.out.println("o admnistrado nao cadostrou nenhum ingresso ainda ");
+                System.out.println("o admnistrado nao cadastrou nenhum ingresso ainda ");
             }
                             
                             break;
@@ -241,7 +251,7 @@ Assento assento = null;
                             break;
 
                         case 9:
-                          if (assento != null) {
+                          if (sala != null) {
                              sala.reservarAssento(numeroAssento);
             } else {
                 System.out.println("Você precisa reservar um assento ");
@@ -260,15 +270,21 @@ Assento assento = null;
                             break;
 
                         case 11:
-                             if (assento != null) {
+                             if (sala != null) {
                               sala.temAssentosDisponiveis();
             } else {
                 System.out.println("Você precisa reservar um assento ");
             }
                            
                             break;
-                        case 0:
-                            System.out.println("voltando...");
+                        case 12:
+                             if (ingresso != null) {
+                            System.out.println(" Digite o numero do assento que voce deseja: ");
+                          int  compra = ler.nextInt();
+                            ingresso.comprarIngresso(compra);
+                              } else {
+                System.out.println("o admnistrado nao cadastrou nenhum ingresso ainda ");
+            }
                             break;
                         default:
                             throw new AssertionError();

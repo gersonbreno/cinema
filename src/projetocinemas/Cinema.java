@@ -54,6 +54,9 @@ public class Cinema {
             System.out.println("- " + sessao.getFilme()+ " às " + sessao.getHorario() + " Horas");
         }
     }
+    public void exibirDados(){
+        System.out.println("Nome CInema: "+getNome()+"endereco Cinema: "+getEndereco());
+    }
 
     public void listarIngressosVendidos() {
         System.out.println("Ingressos vendidos no cinema " + nome + ":");
